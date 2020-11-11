@@ -12,9 +12,17 @@ pipeline {
     }
     stages {
     stage("create docker image") {
+            
+            steps {
+                echo " ============== clone repo  mikro_service =================="
+                dir ('/home/ubuntu/realworld-docker-backup/') {
+                	sh 'git clone https://github.com/korotkov96/mikroservice_project.git'
+                }
+            }
+
             steps {
                 echo " ============== start building image update to 10.11 =================="
-                dir ('./') {
+                dir ('/home/ubuntu/realworld-docker-backup/mikroservice_project/') {
                 	sh 'docker-compose up --build'
                 }
             }
