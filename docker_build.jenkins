@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo " ============== clone repo  mikro_service =================="
                 dir ('/home/ubuntu/realworld-docker-backup/') {
-                	sh 'git clone https://github.com/korotkov96/mikroservice_project.git'
+                	sh 'git pull https://github.com/korotkov96/mikroservice_project.git'
                 }
             }
        }
