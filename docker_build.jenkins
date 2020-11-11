@@ -1,0 +1,23 @@
+#!groovy
+// Run docker build
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent { 
+        label 'ubuntu_docker'
+        }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+    stage("create docker image") {
+            steps {
+                echo " ============== start building image update to 10.11 =================="
+                dir ('./') {
+                	sh 'docker-compose up --build'
+                }
+            }
+        }
+      }
+  }
