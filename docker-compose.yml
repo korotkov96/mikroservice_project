@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  api:
+    build: ./api
+    container_name: realworld-docker-api #название сервиса
+    command: npm run start
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment: #переменные окружения
+      - PORT=3000
+      - HOST=http://realworld.com
+      - MONGO_URL=mongodb://api_db:27017/api
+    depends_on: #запуск первым бд 
+      - api_db
+ 
+  auth:
+    build: ./auth
+    container_name: realworld-docker-auth
+    command: npm run start #запуск сервиса
+    restart: unless-stopped #при возникновение ошибка перезагрузка контейнера
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - HOST=http://realworld-docker.com
+      - MONGO_URL=mongodb://auth_db:27017/auth
+    depends_on:
+      - auth_db   
+
+  api_db: # сервис бд 
+    image: mongo:latest  #образ mongo с docker hub
+    container_name: realworld-docker-api-db
+    volumes:
+      - mongodb_api:/data/db #храним бд не вунтри контейнера.
+
+  auth_db:
+    image: mongo:latest
+    container_name: realworld-docker-auth-db
+    volumes:
+      - mongodb_auth:/data/db
+
+volumes:
+    mongodb_api: #расшариваем бд для использования всех сервисов 
+    mongodb_auth:
