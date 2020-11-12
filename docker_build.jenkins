@@ -12,11 +12,12 @@ pipeline {
     }
     stages {
     stage("docker ps all stop and pull new commite") {
-            echo " ============== clone repo  mikro_service =================="        
+            steps {
+                echo " ============== clone repo  mikro_service =================="        
             script {             
                 	sh 'docker stop $(docker ps -a -q)'              
             }
-
+        }
             steps {
                 echo " ============== clone repo  mikro_service =================="
                 dir ('/home/ubuntu/realworld-docker-backup/') {
