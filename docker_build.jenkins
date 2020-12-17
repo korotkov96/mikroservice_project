@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo " ============== clone repom  mikro_service =================="
                 dir ('/home/ubuntu/mikroservice_project/') {
-                	sh 'git pull https://github.com/korotkov96/mikroservice_project.git'
+                	sh 'git pull git@github.com:korotkov96/mikroservice_project.git'
                 }
             }
        }
