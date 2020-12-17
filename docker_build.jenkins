@@ -13,7 +13,7 @@ pipeline {
     stages {
     stage("docker ps all stop and pull new commite") {        
             steps {
-                echo " ============== clone repo  mikro_service =================="
+                echo " ============== clone repom  mikro_service =================="
                 dir ('/home/ubuntu/') {
                 	sh 'git pull https://github.com/korotkov96/mikroservice_project.git'
                 }
