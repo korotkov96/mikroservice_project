@@ -9,9 +9,9 @@ pipeline {
         timestamps()
     }
     stages {
-    stage("docker ps all stop and pull new commite") {        
+    stage("docker pull new commite") {        
             steps {
-                echo " ============== clone repom  mikro_service =================="
+                echo " ============== pull mikro_service =================="
                 dir ('/home/ubuntu/mikroservice_project/') {
                 	sh 'git pull git@github.com:korotkov96/mikroservice_project.git'
                 }
